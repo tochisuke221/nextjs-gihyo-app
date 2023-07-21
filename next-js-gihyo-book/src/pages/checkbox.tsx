@@ -6,9 +6,13 @@ type MyFormData = {
 
 // 後で消すので一旦App
 const Checkbox = () => {
-  const { handleSubmit, control, formState: { errors } } = useForm<MyFormData>()
-  const onSubmit: SubmitHandler<MyFormData> = data => {
-    console.log(data);
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<MyFormData>()
+  const onSubmit: SubmitHandler<MyFormData> = (data) => {
+    console.log(data)
   }
 
   return (
@@ -25,7 +29,7 @@ const Checkbox = () => {
       {errors.isChecked && <label>チェックしてください</label>}
       <button type="submit">Submit</button>
     </form>
-  );
+  )
 }
 
 export default Checkbox

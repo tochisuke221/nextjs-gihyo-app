@@ -10,13 +10,11 @@ const HomeIconComponent = ({ fontSize, color }: HomeIconProps) => {
     <span style={{ fontSize, color }}>
       <HomeIcon fontSize="inherit" color="inherit" />
     </span>
-  );
+  )
 }
 
 const HomeIcons = () => {
-  return (
-    <HomeIconComponent />
-  );
+  return <HomeIconComponent />
 }
 
-export default HomeIcons;
+export default HomeIcons

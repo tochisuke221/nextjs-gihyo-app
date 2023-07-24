@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import Image, { ImageProps } from 'next/image'
 
 type ImageShape = 'circle' | 'square'
-debugger
 type ShapeImageProps = ImageProps & { shape?: ImageShape }
 
 
@@ -12,7 +11,6 @@ const ImageWithShape = styled(Image)<{ shape?: ImageShape }>`
 `
 
 const ShapeImage = (props: ShapeImageProps) => {
-    debugger
   const { shape, ...imageProps } = props
 
   return <ImageWithShape shape={shape}  {...imageProps} ></ImageWithShape>

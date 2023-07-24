@@ -1,20 +1,27 @@
+
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components'
 import type { Responsive } from '@/types/styles'
 import {
   toPropValue,
+  Space,
   Color,
   FontSize,
   LetterSpacing,
   LineHeight,
-  Space,
 } from '@/utils/styles'
 
-// ボタンのバリアント
-export type ButtonVariant = 'primary' | 'secondary' | 'danger'
+// テキストバリアント
+export type TextVariant =
+  | 'extraSmall'
+  | 'small'
+  | 'medium'
+  | 'mediumLarge'
+  | 'large'
+  | 'extraLarge'
 
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: ButtonVariant
+export type TextProps = {
+  variant?: TextVariant
   fontSize?: Responsive<FontSize>
   fontWeight?: Responsive<string>
   letterSpacing?: Responsive<LetterSpacing>
@@ -39,99 +46,59 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   paddingRight?: Responsive<Space>
   paddingBottom?: Responsive<Space>
   paddingLeft?: Responsive<Space>
-  pseudoClass?: {
-    hover?: {
-      backgroundColor?: Responsive<Color>
-    }
-    disabled?: {
-      backgroundColor?: Responsive<Color>
-    }
-  }
 }
 
 const variants = {
-  // プライマリ
-  primary: {
-    color: 'white',
-    backgroundColor: 'primary',
-    border: 'none',
-    pseudoClass: {
-      hover: {
-        backgroundColor: 'primaryDark',
-      },
-      disabled: {
-        backgroundColor: 'primary',
-      },
-    },
+  extraSmall: {
+    fontSize: 'extraSmall',
+    letterSpacing: 0,
+    lineHeight: 0,
   },
-  // セカンダリ
-  secondary: {
-    color: 'white',
-    backgroundColor: 'secondary',
-    border: 'none',
-    pseudoClass: {
-      hover: {
-        backgroundColor: 'secondaryDark',
-      },
-      disabled: {
-        backgroundColor: 'secondary',
-      },
-    },
+  small: {
+    fontSize: 'small',
+    letterSpacing: 1,
+    lineHeight: 1,
   },
-  // デンジャー
-  danger: {
-    color: 'white',
-    backgroundColor: 'danger',
-    border: 'none',
-    pseudoClass: {
-      hover: {
-        backgroundColor: 'dangerDark',
-      },
-      disabled: {
-        backgroundColor: 'danger',
-      },
-    },
+  medium: {
+    fontSize: 'medium',
+    letterSpacing: 2,
+    lineHeight: 2,
+  },
+  mediumLarge: {
+    fontSize: 'mediumLarge',
+    letterSpacing: 3,
+    lineHeight: 3,
+  },
+  large: {
+    fontSize: 'large',
+    letterSpacing: 4,
+    lineHeight: 4,
+  },
+  extraLarge: {
+    fontSize: 'extraLarge',
+    letterSpacing: 5,
+    lineHeight: 5,
   },
 }
 
 /**
- * ボタン
+ * テキスト
  * バリアント、色、タイポグラフィ、レイアウト、スペース関連のPropsを追加
  */
-const Button = styled.button<ButtonProps>`
-  ${({ variant, color, backgroundColor, pseudoClass, theme }) => {
+const Text = styled.span<TextProps>`
+  ${({ variant, fontSize, letterSpacing, lineHeight, theme }) => {
     // バリアントのスタイルの適用
     if (variant && variants[variant]) {
       const styles = []
-      !color &&
-        styles.push(toPropValue('color', variants[variant].color, theme))
-      !backgroundColor &&
+      !fontSize &&
+        styles.push(toPropValue('font-size', variants[variant].fontSize, theme))
+      !letterSpacing &&
         styles.push(
-          toPropValue(
-            'background-color',
-            variants[variant].backgroundColor,
-            theme,
-          ),
+          toPropValue('letter-spacing', variants[variant].letterSpacing, theme),
         )
-      !pseudoClass &&
+      !lineHeight &&
         styles.push(
-          `&:hover {
-            ${toPropValue(
-              'background-color',
-              variants[variant].pseudoClass.hover.backgroundColor,
-              theme,
-            )}
-          }`.replaceAll('\n', ''),
-        )
-      !pseudoClass &&
-        styles.push(
-          `&:disabled {
-            ${toPropValue(
-              'background-color',
-              variants[variant].pseudoClass.disabled.backgroundColor,
-              theme,
-            )}
-          }`.replaceAll('\n', ''),
+          toPropValue('line-height', variants[variant].lineHeight, theme),
         )
       return styles.join('\n')
     }
@@ -158,39 +125,11 @@ const Button = styled.button<ButtonProps>`
   ${(props) => toPropValue('padding-left', props.paddingLeft, props.theme)}
   ${(props) => toPropValue('padding-bottom', props.paddingBottom, props.theme)}
   ${(props) => toPropValue('padding-right', props.paddingRight, props.theme)}
-  &:hover {
-    ${(props) =>
-      toPropValue(
-        'background-color',
-        props?.pseudoClass?.hover?.backgroundColor,
-      )}
-  }
-  &:disabled {
-    ${(props) =>
-      toPropValue(
-        'background-color',
-        props?.pseudoClass?.disabled?.backgroundColor,
-      )}
-  }
-  cursor: pointer;
-  outline: 0;
-  text-decoration: 'none';
-  opacity: ${({ disabled }) => (disabled ? '0.5' : '1')};
-  border-radius: 4px;
-  border: none;
 `
 
-Button.defaultProps = {
-  variant: 'primary',
-  paddingLeft: 2,
-  paddingRight: 2,
-  paddingTop: 1,
-  paddingBottom: 1,
-  color: 'white',
-  display: 'inline-block',
-  textAlign: 'center',
-  lineHeight: 'inherit',
-  fontSize: 'inherit',
+Text.defaultProps = {
+  variant: 'medium',
+  color: 'text',
 }
 
-export default Button
+export default Text

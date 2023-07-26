@@ -42,7 +42,6 @@ const StyledTextArea = styled.textarea<{ hasError?: boolean }>`
  * テキストエリア
  */
 const TextArea = (props: TextAreaProps) => {
-  debugger
   const {
     rows = 5,
     minRows = 5,
@@ -81,7 +80,7 @@ const TextArea = (props: TextAreaProps) => {
       // 最大を超えないように行数をセット
       setTextareaRows(currentRows < maxRows ? currentRows : maxRows)
 
-      onChange && onChange(e)
+      onChange && onChange(e) // 不要な気がするが、、、おそらくStoryBookのactionタグに表示させるため？
     },
     [onChange, minRows, maxRows],
   )

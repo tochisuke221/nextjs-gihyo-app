@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
 import { theme } from "@/themes";
-import type { ResponsiveProp, Responsive } from '../types/styles'
+import type { ResponsiveProp, Responsive } from '@/types/styles'
 
 // Themeの型
 export type AppTheme = typeof theme

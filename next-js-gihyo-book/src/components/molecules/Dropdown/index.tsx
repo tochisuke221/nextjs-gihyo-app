@@ -105,7 +105,7 @@ interface DropdownProps {
   /**
    * ドロップダウンの値
    */
-  value?: string | number
+  value?: string | number | null
   /**
    * <input />のname属性
    */

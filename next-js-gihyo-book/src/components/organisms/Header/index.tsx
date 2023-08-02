@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import styled from 'styled-components'
-import AppLogo from '@components/atoms/AppLogo'
-import Button from '@components/atoms/Button'
+import AppLogo from '@/components/atoms/AppLogo'
+import Button from '@/components/atoms/Button'
 import {
   SearchIcon,
   PersonIcon,

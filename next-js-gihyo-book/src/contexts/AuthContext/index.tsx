@@ -31,7 +31,6 @@ const AuthContext = React.createContext<AuthContextType>({
 export const useAuthContext = (): AuthContextType =>
   useContext<AuthContextType>(AuthContext)
 
-  debugger
 /**
  * 認証コンテキストプロバイダー
  * @param params パラメータ

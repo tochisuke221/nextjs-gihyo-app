@@ -79,13 +79,29 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
             タイトル
           </Text>
           {/* 商品タイトルの入力 */}
-          <Input
+          {/* <Input
             {...register('title', { required: true })}
             name="title"
             type="text"
             placeholder="商品のタイトル"
             hasError={!!errors.title}
+          /> */}
+
+          <Controller
+            control={control}
+            name="title"
+            rules={{ required: true }}
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <Input
+                placeholder="商品のタイトル！"
+                hasError={!!error}
+                onChange={onChange}
+                value={value}
+              >
+              </Input>
+            )}
           />
+
           {errors.title && (
             <Text color="danger" variant="small" paddingLeft={1}>
               タイトルの入力は必須です
@@ -111,6 +127,7 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
               </TextArea>
             )}
           /> */}
+          {/* 参考: https://scrapbox.io/mrsekut-p/react-hook-form%E3%81%A7register%E3%81%A8Controller%E3%81%AE%E3%81%A9%E3%81%A1%E3%82%89%E3%82%92%E4%BD%BF%E3%81%86%E3%81%8B */}
           <TextArea
             {...register('description', { required: true })}
             name="description"

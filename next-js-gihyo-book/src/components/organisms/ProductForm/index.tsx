@@ -97,7 +97,7 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
             概要
           </Text>
           {/* 商品概要の入力 */}
-          <Controller
+          {/* <Controller
             control={control}
             name="description"
             rules={{ required: true }}
@@ -110,7 +110,14 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
                 {value}
               </TextArea>
             )}
-          />
+          /> */}
+          <TextArea
+            {...register('description', { required: true })}
+            name="description"
+            placeholder="商品のタイトル"
+            hasError={!!errors.description}
+          >
+          </TextArea>
           {errors.description && (
             <Text color="danger" variant="small" paddingLeft={1}>
               概要の入力は必須です

@@ -14,7 +14,6 @@ export default {
 } as ComponentMeta<typeof ProductForm>
 
 const Template: ComponentStory<typeof ProductForm> = (args) => {
-  debugger
   return <ProductForm {...args} />
 }
 export const Form = Template.bind({})

@@ -79,14 +79,13 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
             タイトル
           </Text>
           {/* 商品タイトルの入力 */}
-          {/* <Input
+          <Input
             {...register('title', { required: true })}
             name="title"
             type="text"
             placeholder="商品のタイトル"
             hasError={!!errors.title}
-          /> */}
-
+          /> 
           <Controller
             control={control}
             name="title"
@@ -113,7 +112,7 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
             概要
           </Text>
           {/* 商品概要の入力 */}
-          {/* <Controller
+          <Controller
             control={control}
             name="description"
             rules={{ required: true }}
@@ -126,15 +125,16 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
                 {value}
               </TextArea>
             )}
-          /> */}
+          />
           {/* 参考: https://scrapbox.io/mrsekut-p/react-hook-form%E3%81%A7register%E3%81%A8Controller%E3%81%AE%E3%81%A9%E3%81%A1%E3%82%89%E3%82%92%E4%BD%BF%E3%81%86%E3%81%8B */}
-          <TextArea
-            {...register('description', { required: true })}
+          {/* https://qiita.com/s_taro/items/06ace4d323176a1f2fff */}
+          {/* どうやら関数コンポーネントを使っている場合はrefを使う必要があるっぽい。けどめんどいからControlleraiseって感じっっぽい */}
+          {/* <TextArea
+            {...register('description', { required: true })} // フォームフィールドを登録してバリデーションルールを指定
             name="description"
             placeholder="商品のタイトル"
-            hasError={!!errors.description}
-          >
-          </TextArea>
+            hasError={!!errors.description} // バリデーションエラーがあれば true
+          /> */}
           {errors.description && (
             <Text color="danger" variant="small" paddingLeft={1}>
               概要の入力は必須です

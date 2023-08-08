@@ -3,13 +3,15 @@ const nextConfig = {
   reactStrictMode: true,
   compiler: (() => {
     let compilerConfig = {
-      styledComponents: true
+      // styledComponentsの有効化
+      styledComponents: true,
     }
 
-    if(process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === 'production') {
       compilerConfig = {
         ...compilerConfig,
-        reactRemoveProperties: { properties: ['^data-testid$'] }
+        // 本番環境ではReact Testing Libraryで使用するdata-testid属性を削除
+        reactRemoveProperties: { properties: ['^data-testid$'] },
       }
     }
 
@@ -18,11 +20,13 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: `${process.env.NEXT_PUBLIC_API_BASE_PATH}/:match*`,
-        destination: `${process.env.API_BASE_URL}/:match*`
-      }
+        // ex. /api/proxy
+        source: `/api/proxy/:match*`,
+        // ex. http://localhost:8000
+        destination: `http://localhost:8000/:match*`,
+      },
     ]
-  }
+  },
 }
 
 module.exports = nextConfig

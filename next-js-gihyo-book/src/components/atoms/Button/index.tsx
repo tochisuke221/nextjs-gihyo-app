@@ -9,6 +9,8 @@ import {
   LineHeight,
   Space,
 } from '@/utils/styles'
+import 'core-js'; // 古いバージョンのNode.jsを使用する必要がある場合、replaceAllのポリフィルを手動で追加
+
 
 // ボタンのバリアント
 export type ButtonVariant = 'primary' | 'secondary' | 'danger'

@@ -19,8 +19,47 @@ import type {
   import getUser from '@/services/users/get-user'
   import type { ApiContext } from '@/types/data'
   
+  // getStaticPropsで返却した型GetStaticPropsを Page コンポーネントで受け取るためにInferGetStaticPropsTypeを利用
   type UserPageProps = InferGetStaticPropsType<typeof getStaticProps>
   
+  export const getStaticPaths: GetStaticPaths = async () => {
+    const context: ApiContext = {
+      apiRootUrl: process.env.API_BASE_URL || 'http://localhost:5000',
+    }
+    const users = await getAllUsers(context)
+    const paths = users.map((u) => `/users/${u.id}`)
+  
+    return { paths, fallback: true } // ビルド後にユーザが追加される場合があるためfallbackをtrueにしておく。
+  }
+  
+  export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
+    const context: ApiContext = {
+      apiRootUrl: process.env.API_BASE_URL || 'http://localhost:5000',
+    }
+  
+    if (!params) {
+      throw new Error('params is undefined')
+    }
+  
+    // ユーザー情報と ユーザーの所持する商品を取得し、静的ページを作成
+    // 10秒でrevalidateな状態にし、静的ページを更新する
+    const userId = Number(params.id)
+    const [user, products] = await Promise.all([
+      getUser(context, { id: userId }),
+      getAllProducts(context, { userId }),
+    ])
+  
+    return {
+      props: {
+        id: userId,
+        user,
+        products: products ?? [],
+      },
+      revalidate: 10, // [id].tsxでは意味ない気がする
+    }
+  }
+
+
   const UserPage: NextPage<UserPageProps> = ({
     id,
     user,
@@ -74,42 +113,5 @@ import type {
       </Layout>
     )
   }
-  
-  export const getStaticPaths: GetStaticPaths = async () => {
-    const context: ApiContext = {
-      apiRootUrl: process.env.API_BASE_URL || 'http://localhost:5000',
-    }
-    const users = await getAllUsers(context)
-    const paths = users.map((u) => `/users/${u.id}`)
-  
-    return { paths, fallback: true }
-  }
-  
-  export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
-    const context: ApiContext = {
-      apiRootUrl: process.env.API_BASE_URL || 'http://localhost:5000',
-    }
-  
-    if (!params) {
-      throw new Error('params is undefined')
-    }
-  
-    // ユーザー情報と ユーザーの所持する商品を取得し、静的ページを作成
-    // 10秒でrevalidateな状態にし、静的ページを更新する
-    const userId = Number(params.id)
-    const [user, products] = await Promise.all([
-      getUser(context, { id: userId }),
-      getAllProducts(context, { userId }),
-    ])
-  
-    return {
-      props: {
-        id: userId,
-        user,
-        products: products ?? [],
-      },
-      revalidate: 10,
-    }
-  }
-  
+    
   export default UserPage

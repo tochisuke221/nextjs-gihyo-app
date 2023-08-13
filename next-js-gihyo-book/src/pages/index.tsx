@@ -1,13 +1,13 @@
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import Link from 'next/link'
-import Text from 'components/atoms/Text'
-import Box from 'components/layout/Box'
-import Flex from 'components/layout/Flex'
-import ProductCard from 'components/organisms/ProductCard'
-import ProductCardCarousel from 'components/organisms/ProductCardCarousel'
-import Layout from 'components/templates/Layout'
-import getAllProducts from 'services/products/get-all-products'
-import { ApiContext, Product } from 'types'
+import Text from '@/components/atoms/Text'
+import Box from '@/components/layout/Box'
+import Flex from '@/components/layout/Flex'
+import ProductCard from '@/components/organisms/ProductCard'
+import ProductCardCarousel from '@/components/organisms/ProductCardCarousel'
+import Layout from '@/components/templates/Layout'
+import getAllProducts from '@/services/products/get-all-products'
+import { ApiContext, Product } from '@/types/data'
 
 type HomePageProps = InferGetStaticPropsType<typeof getStaticProps>
 

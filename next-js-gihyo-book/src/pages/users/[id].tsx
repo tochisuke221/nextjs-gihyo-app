@@ -48,6 +48,8 @@ import type {
       getUser(context, { id: userId }),
       getAllProducts(context, { userId }),
     ])
+
+    debugger
   
     return {
       props: {

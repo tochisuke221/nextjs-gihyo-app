@@ -16,11 +16,11 @@ import type {
   import ProductCard from '@/components/organisms/ProductCard'
   import UserProfile from '@/components/organisms/UserProfile'
   import Layout from '@/components/templates/Layout'
-  import AddToCartButtonContainer from '@/AddToCartButtonContainer'
+  import AddToCartButtonContainer from '@/containers/AddToCartButtonContainer'
   import getAllProducts from '@/services/products/get-all-products'
   import getProduct from '@/services/products/get-product'
   import useProduct from '@/services/products/use-product'
-  import type { ApiContext, Category } from 'types'
+  import type { ApiContext, Category } from '@/types/data'
   
   const categoryNameDict: Record<Category, string> = {
     book: '本',

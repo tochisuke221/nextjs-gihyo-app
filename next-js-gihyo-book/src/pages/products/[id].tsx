@@ -70,7 +70,7 @@ import type {
       revalidate: 10,
     }
   }
-  
+
   const ProductPage: NextPage<ProductPageProps> = ({
     id,
     product: initial,
